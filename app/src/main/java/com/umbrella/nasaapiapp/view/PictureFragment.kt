@@ -1,6 +1,7 @@
 package com.umbrella.nasaapiapp.view
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import com.umbrella.nasaapiapp.R
 import com.umbrella.nasaapiapp.databinding.FragmentPictureBinding
 import com.umbrella.nasaapiapp.model.AppState
 import com.umbrella.nasaapiapp.viewmodel.PictureViewModel
 import java.lang.Exception
+
+const val ARG_WIKI_REQUEST = "ARG_WIKI_REQUEST"
 
 class PictureFragment : Fragment() {
 
@@ -36,10 +41,25 @@ class PictureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBottomSheet()
+        initInputEditTextEnterKeyListener()
         viewModel.getPictureLiveData().observe(viewLifecycleOwner) { result ->
-            renderData(result)
+            result?.let {
+                renderData(result)
+            }
         }
         viewModel.makeApiCall()
+    }
+
+    private fun initInputEditTextEnterKeyListener() {
+        binding.inputEditText.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                val bundle = Bundle()
+                bundle.putString(ARG_WIKI_REQUEST, binding.inputEditText.text.toString())
+                findNavController().navigate(R.id.wikiFragment, bundle)
+                return@setOnKeyListener true
+            }
+            false
+        }
     }
 
     private fun initBottomSheet() {
@@ -50,25 +70,29 @@ class PictureFragment : Fragment() {
     private fun renderData(result: AppState) {
         with(binding) {
             when (result) {
-                is AppState.Loading -> progressBar.visibility = View.VISIBLE
+                is AppState.Loading -> progressBarLayout.root.visibility = View.VISIBLE
                 is AppState.Success -> {
                     Picasso.get().load(result.response.url)
                         .into(pictureImageView, object : Callback {
                             override fun onSuccess() {
-                                progressBar.visibility = View.GONE
-                                bottomSheet.root.visibility = View.VISIBLE
-                                bottomSheet.bottomSheetDescriptionHeader.text = result.response.title
-                                bottomSheet.bottomSheetDescription.text = result.response.explanation
+                                progressBarLayout.root.visibility = View.GONE
+                                bottomSheet.bottomSheetDescriptionHeader.text =
+                                    result.response.title
+                                bottomSheet.bottomSheetDescription.text =
+                                    result.response.explanation
                             }
+
                             override fun onError(error: Exception) {
-                                progressBar.visibility = View.GONE
+                                progressBarLayout.progressBar.visibility = View.GONE
                                 showToast(error)
                             }
                         })
+                    viewModel.clearPictureLiveData()
                 }
                 is AppState.Error -> {
-                    progressBar.visibility = View.GONE
+                    progressBarLayout.progressBar.visibility = View.GONE
                     showToast(result.error)
+                    viewModel.clearPictureLiveData()
                 }
             }
         }

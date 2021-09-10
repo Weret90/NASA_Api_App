@@ -10,4 +10,9 @@
         android:name="com.umbrella.nasaapiapp.view.PictureFragment"
         android:label="fragment_picture"
         tools:layout="@layout/fragment_picture" />
+    <fragment
+        android:id="@+id/wikiFragment"
+        android:name="com.umbrella.nasaapiapp.view.WikiFragment"
+        android:label="fragment_wiki"
+        tools:layout="@layout/fragment_wiki" />
 </navigation>

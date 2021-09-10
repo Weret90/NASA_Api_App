@@ -25,4 +25,8 @@ class PictureViewModel : ViewModel() {
             }
         }
     }
+
+    fun clearPictureLiveData() {
+        pictureLiveData.value = null
+    }
 }
