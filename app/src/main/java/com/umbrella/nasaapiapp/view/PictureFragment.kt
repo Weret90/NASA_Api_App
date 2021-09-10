@@ -70,7 +70,11 @@ class PictureFragment : Fragment() {
     private fun renderData(result: AppState) {
         with(binding) {
             when (result) {
-                is AppState.Loading -> progressBarLayout.root.visibility = View.VISIBLE
+                
+                is AppState.Loading -> {
+                    progressBarLayout.root.visibility = View.VISIBLE
+                }
+
                 is AppState.Success -> {
                     Picasso.get().load(result.response.url)
                         .into(pictureImageView, object : Callback {
@@ -81,7 +85,6 @@ class PictureFragment : Fragment() {
                                 bottomSheet.bottomSheetDescription.text =
                                     result.response.explanation
                             }
-
                             override fun onError(error: Exception) {
                                 progressBarLayout.progressBar.visibility = View.GONE
                                 showToast(error)
@@ -89,6 +92,7 @@ class PictureFragment : Fragment() {
                         })
                     viewModel.clearPictureLiveData()
                 }
+
                 is AppState.Error -> {
                     progressBarLayout.progressBar.visibility = View.GONE
                     showToast(result.error)
