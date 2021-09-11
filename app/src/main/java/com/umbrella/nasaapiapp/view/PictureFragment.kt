@@ -23,6 +23,7 @@ import com.umbrella.nasaapiapp.viewmodel.PictureViewModel
 import java.lang.Exception
 
 const val ARG_WIKI_REQUEST = "ARG_WIKI_REQUEST"
+private const val ARG_IS_DAY_WAS_CHOSEN = "ARG_IS_DAY_WAS_CHOSEN"
 
 class PictureFragment : Fragment() {
 
@@ -32,7 +33,7 @@ class PictureFragment : Fragment() {
         ViewModelProvider(this).get(PictureViewModel::class.java)
     }
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private var isFirstLaunch = true
+    private var isDayWasChosen = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +46,11 @@ class PictureFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        savedInstanceState?.let {
+            isDayWasChosen = it.getBoolean(ARG_IS_DAY_WAS_CHOSEN)
+        }
+
         initBottomSheet()
         initInputEditTextEnterKeyListener()
         binding.chipGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -61,10 +67,15 @@ class PictureFragment : Fragment() {
                 renderData(result)
             }
         }
-        if (isFirstLaunch) {
+        if (!isDayWasChosen) {
             binding.chipToday.isChecked = true
-            isFirstLaunch = false
+            isDayWasChosen = true
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(ARG_IS_DAY_WAS_CHOSEN, isDayWasChosen)
     }
 
     private fun initInputEditTextEnterKeyListener() {
