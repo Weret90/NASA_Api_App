@@ -1,5 +1,6 @@
 package com.umbrella.nasaapiapp.view
 
+import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,7 @@ import com.squareup.picasso.Picasso
 import com.umbrella.nasaapiapp.R
 import com.umbrella.nasaapiapp.databinding.FragmentPictureBinding
 import com.umbrella.nasaapiapp.model.AppState
+import com.umbrella.nasaapiapp.model.Day
 import com.umbrella.nasaapiapp.viewmodel.PictureViewModel
 import java.lang.Exception
 
@@ -29,6 +32,7 @@ class PictureFragment : Fragment() {
         ViewModelProvider(this).get(PictureViewModel::class.java)
     }
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private var isFirstLaunch = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,16 +42,29 @@ class PictureFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBottomSheet()
         initInputEditTextEnterKeyListener()
+        binding.chipGroup.setOnCheckedChangeListener { _, checkedId ->
+            with(binding) {
+                when (checkedId) {
+                    chipBeforeYesterday.id -> viewModel.makeApiCall(Day.BEFORE_YESTERDAY)
+                    chipYesterday.id -> viewModel.makeApiCall(Day.YESTERDAY)
+                    chipToday.id -> viewModel.makeApiCall(Day.TODAY)
+                }
+            }
+        }
         viewModel.getPictureLiveData().observe(viewLifecycleOwner) { result ->
             result?.let {
                 renderData(result)
             }
         }
-        viewModel.makeApiCall()
+        if (isFirstLaunch) {
+            binding.chipToday.isChecked = true
+            isFirstLaunch = false
+        }
     }
 
     private fun initInputEditTextEnterKeyListener() {
@@ -70,7 +87,7 @@ class PictureFragment : Fragment() {
     private fun renderData(result: AppState) {
         with(binding) {
             when (result) {
-                
+
                 is AppState.Loading -> {
                     progressBarLayout.root.visibility = View.VISIBLE
                 }
@@ -85,6 +102,7 @@ class PictureFragment : Fragment() {
                                 bottomSheet.bottomSheetDescription.text =
                                     result.response.explanation
                             }
+
                             override fun onError(error: Exception) {
                                 progressBarLayout.progressBar.visibility = View.GONE
                                 showToast(error)
