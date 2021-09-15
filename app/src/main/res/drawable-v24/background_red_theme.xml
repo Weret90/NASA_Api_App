@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="@color/black" />
+    </item>
+    <item
+        android:drawable="@drawable/mars_theme_pic"
+        android:gravity="center"/>
+</layer-list>
+
+
