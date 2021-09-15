@@ -12,6 +12,7 @@
     <color name="bottom_sheet_line_color">#663b4351</color>
     <color name="bottom_sheet_main_color_default_theme">#f6f6fa</color>
     <color name="bottom_sheet_main_color_red_theme">@android:color/holo_orange_light</color>
+    <color name="bottom_sheet_main_color_night_theme">@android:color/darker_gray</color>
 
     <!--    red_theme-->
     <color name="red_theme_color_primary">#b30000</color>

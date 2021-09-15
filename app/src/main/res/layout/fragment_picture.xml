@@ -88,6 +88,16 @@
         android:id="@+id/bottomSheet"
         layout="@layout/bottom_sheet_layout" />
 
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="?attr/colorPrimary"
+        app:fabAlignmentMode="center"
+        app:hideOnScroll="true"
+        app:layout_scrollFlags="scroll|enterAlways" />
+
     <include
         android:id="@+id/progressBarLayout"
         layout="@layout/progress_bar_layout"
