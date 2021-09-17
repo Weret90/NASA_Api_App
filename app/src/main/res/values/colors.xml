@@ -7,6 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--    bottom_sheet_layout-->
     <color name="bottom_sheet_line_color">#663b4351</color>
-    <color name="bottom_sheet_background_color">#f6f6fa</color>
+    <color name="bottom_sheet_main_color_default_theme">#f6f6fa</color>
+    <color name="bottom_sheet_main_color_red_theme">@android:color/holo_orange_light</color>
+    <color name="bottom_sheet_main_color_night_theme">@android:color/darker_gray</color>
+
+    <!--    red_theme-->
+    <color name="red_theme_color_primary">#b30000</color>
+    <color name="red_theme_color_primary_variant">#ff3333</color>
+    <color name="red_theme_color_secondary">@android:color/holo_orange_light</color>
+    <color name="red_theme_color_secondary_variant">@android:color/holo_orange_dark</color>
 </resources>

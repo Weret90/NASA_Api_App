@@ -1,15 +1,13 @@
 package com.umbrella.nasaapiapp.view
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.view.KeyEvent
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -20,10 +18,10 @@ import com.umbrella.nasaapiapp.databinding.FragmentPictureBinding
 import com.umbrella.nasaapiapp.model.AppState
 import com.umbrella.nasaapiapp.model.Day
 import com.umbrella.nasaapiapp.viewmodel.PictureViewModel
-import java.lang.Exception
 
 const val ARG_WIKI_REQUEST = "ARG_WIKI_REQUEST"
 private const val ARG_IS_DAY_WAS_CHOSEN = "ARG_IS_DAY_WAS_CHOSEN"
+const val ARG_IS_RED_THEME = "ARG_IS_RED_THEME"
 
 class PictureFragment : Fragment() {
 
@@ -50,6 +48,8 @@ class PictureFragment : Fragment() {
         savedInstanceState?.let {
             isDayWasChosen = it.getBoolean(ARG_IS_DAY_WAS_CHOSEN)
         }
+
+        setBottomAppBar(view)
 
         initBottomSheet()
         initInputEditTextEnterKeyListener()
@@ -101,6 +101,8 @@ class PictureFragment : Fragment() {
 
                 is AppState.Loading -> {
                     progressBarLayout.root.visibility = View.VISIBLE
+                    bottomSheet.root.visibility = View.GONE
+                    bottomAppBar.visibility = View.GONE
                 }
 
                 is AppState.Success -> {
@@ -108,6 +110,8 @@ class PictureFragment : Fragment() {
                         .into(pictureImageView, object : Callback {
                             override fun onSuccess() {
                                 progressBarLayout.root.visibility = View.GONE
+                                bottomSheet.root.visibility = View.VISIBLE
+                                bottomAppBar.visibility = View.VISIBLE
                                 bottomSheet.bottomSheetDescriptionHeader.text =
                                     result.response.title
                                 bottomSheet.bottomSheetDescription.text =
@@ -133,6 +137,28 @@ class PictureFragment : Fragment() {
 
     private fun showToast(error: Throwable) {
         Toast.makeText(context, error.message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_change_theme, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.app_bar_change_theme) {
+            val context = activity as MainActivity
+            val sp = context.getPreferences(Context.MODE_PRIVATE)
+            val isRedTheme = sp.getBoolean(ARG_IS_RED_THEME, false)
+            sp.edit().putBoolean(ARG_IS_RED_THEME, !isRedTheme).apply()
+            context.recreate()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setBottomAppBar(view: View) {
+        val context = activity as MainActivity
+        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+        setHasOptionsMenu(true)
     }
 
     override fun onDestroyView() {

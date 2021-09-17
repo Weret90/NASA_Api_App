@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="@color/black" />
+    </item>
+    <item
+        android:width="@dimen/start_theme_logo_size"
+        android:height="@dimen/start_theme_logo_size"
+        android:drawable="@drawable/nasa_logo"
+        android:gravity="center" />
+</layer-list>

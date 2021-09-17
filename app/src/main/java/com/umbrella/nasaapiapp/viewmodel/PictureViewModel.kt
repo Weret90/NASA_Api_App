@@ -12,9 +12,10 @@ import com.umbrella.nasaapiapp.model.Day
 import com.umbrella.nasaapiapp.model.api.ApiFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.*
+import java.time.ZoneId
+
+private const val ZONE_ID = "America/Los_Angeles"
 
 class PictureViewModel : ViewModel() {
     private val pictureLiveData = MutableLiveData<AppState>()
@@ -34,13 +35,13 @@ class PictureViewModel : ViewModel() {
         }
     }
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun getDate(day: Day): String {
+        val todayInUSA = LocalDate.now(ZoneId.of(ZONE_ID))
         return when (day) {
-            Day.TODAY -> LocalDate.now().toString()
-            Day.YESTERDAY -> LocalDate.now().minusDays(1).toString()
-            Day.BEFORE_YESTERDAY -> LocalDate.now().minusDays(2).toString()
+            Day.TODAY -> todayInUSA.toString()
+            Day.YESTERDAY -> todayInUSA.minusDays(1).toString()
+            Day.BEFORE_YESTERDAY -> todayInUSA.minusDays(2).toString()
         }
     }
 
