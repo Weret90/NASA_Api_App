@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NASA Api App</string>
+    <string name="search_wiki">Найти в Википедии</string>
+    <string name="wiki_helper_text">Поищите термин в википедии</string>
+    <string name="chip_before_yesterday">Позавчера</string>
+    <string name="chip_yesterday">Вчера</string>
+    <string name="chip_today">Сегодня</string>
 </resources>
