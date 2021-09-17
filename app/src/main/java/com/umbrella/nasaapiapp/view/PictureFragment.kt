@@ -101,6 +101,8 @@ class PictureFragment : Fragment() {
 
                 is AppState.Loading -> {
                     progressBarLayout.root.visibility = View.VISIBLE
+                    bottomSheet.root.visibility = View.GONE
+                    bottomAppBar.visibility = View.GONE
                 }
 
                 is AppState.Success -> {
@@ -108,6 +110,8 @@ class PictureFragment : Fragment() {
                         .into(pictureImageView, object : Callback {
                             override fun onSuccess() {
                                 progressBarLayout.root.visibility = View.GONE
+                                bottomSheet.root.visibility = View.VISIBLE
+                                bottomAppBar.visibility = View.VISIBLE
                                 bottomSheet.bottomSheetDescriptionHeader.text =
                                     result.response.title
                                 bottomSheet.bottomSheetDescription.text =

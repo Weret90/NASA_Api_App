@@ -85,6 +85,11 @@
     </androidx.core.widget.NestedScrollView>
 
     <include
+        android:id="@+id/progressBarLayout"
+        layout="@layout/progress_bar_layout"
+        android:visibility="gone" />
+
+    <include
         android:id="@+id/bottomSheet"
         layout="@layout/bottom_sheet_layout" />
 
@@ -97,10 +102,5 @@
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways" />
-
-    <include
-        android:id="@+id/progressBarLayout"
-        layout="@layout/progress_bar_layout"
-        android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
