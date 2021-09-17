@@ -1,6 +1,8 @@
 package com.umbrella.nasaapiapp.view
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
@@ -106,23 +108,22 @@ class PictureFragment : Fragment() {
                 }
 
                 is AppState.Success -> {
-                    Picasso.get().load(result.response.url)
-                        .into(pictureImageView, object : Callback {
-                            override fun onSuccess() {
-                                progressBarLayout.root.visibility = View.GONE
-                                bottomSheet.root.visibility = View.VISIBLE
-                                bottomAppBar.visibility = View.VISIBLE
-                                bottomSheet.bottomSheetDescriptionHeader.text =
-                                    result.response.title
-                                bottomSheet.bottomSheetDescription.text =
-                                    result.response.explanation
-                            }
-
-                            override fun onError(error: Exception) {
-                                progressBarLayout.progressBar.visibility = View.GONE
-                                showToast(error)
-                            }
-                        })
+                    if (result.response.mediaType != "video") {
+                        Picasso.get().load(result.response.url)
+                            .into(pictureImageView, PicassoCallback(result))
+                        pictureImageView.isEnabled = false
+                        iconPlay.visibility = View.GONE
+                    } else {
+                        Picasso.get().load(result.response.thumbnailUrl)
+                            .into(pictureImageView, PicassoCallback(result))
+                        iconPlay.visibility = View.VISIBLE
+                        pictureImageView.isEnabled = true
+                        pictureImageView.setOnClickListener {
+                            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                data = Uri.parse(result.response.url)
+                            })
+                        }
+                    }
                     viewModel.clearPictureLiveData()
                 }
 
@@ -164,5 +165,24 @@ class PictureFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private inner class PicassoCallback(val result: AppState.Success) : Callback {
+        override fun onSuccess() {
+            with(binding) {
+                progressBarLayout.root.visibility = View.GONE
+                bottomSheet.root.visibility = View.VISIBLE
+                bottomAppBar.visibility = View.VISIBLE
+                bottomSheet.bottomSheetDescriptionHeader.text =
+                    result.response.title
+                bottomSheet.bottomSheetDescription.text =
+                    result.response.explanation
+            }
+        }
+
+        override fun onError(error: java.lang.Exception) {
+            binding.progressBarLayout.progressBar.visibility = View.GONE
+            showToast(error)
+        }
     }
 }

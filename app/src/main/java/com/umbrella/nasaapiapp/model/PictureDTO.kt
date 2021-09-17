@@ -19,5 +19,7 @@ data class PictureDTO(
     @SerializedName("title")
     val title: String,
     @SerializedName("url")
-    val url: String
+    val url: String,
+    @SerializedName("thumbnail_url")
+    val thumbnailUrl: String
 )

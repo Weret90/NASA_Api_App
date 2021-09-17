@@ -50,6 +50,20 @@
                 app:layout_constraintTop_toBottomOf="@id/input_layout"
                 tools:src="@drawable/nasa_logo" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iconPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="3"
+                android:scaleY="3"
+                android:src="@android:drawable/ic_media_play"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/pictureImageView"
+                app:layout_constraintEnd_toEndOf="@+id/pictureImageView"
+                app:layout_constraintStart_toStartOf="@+id/pictureImageView"
+                app:layout_constraintTop_toTopOf="@+id/pictureImageView" />
+
+
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroup"
                 android:layout_width="wrap_content"
