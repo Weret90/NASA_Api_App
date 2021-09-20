@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@color/white"
-    tools:context=".view.PictureFragment">
+    tools:context=".view.fragments.PictureFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -101,6 +101,11 @@
     <include
         android:id="@+id/progressBarLayout"
         layout="@layout/progress_bar_layout"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/errorLayout"
+        layout="@layout/error_layout"
         android:visibility="gone" />
 
     <include

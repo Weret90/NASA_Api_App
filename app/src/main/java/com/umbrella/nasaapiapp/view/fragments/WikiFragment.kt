@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.view
+package com.umbrella.nasaapiapp.view.fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle

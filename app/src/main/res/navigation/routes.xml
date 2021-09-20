@@ -3,16 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/routes"
-    app:startDestination="@id/pictureFragment">
+    app:startDestination="@id/viewPagerFragment">
 
     <fragment
         android:id="@+id/pictureFragment"
-        android:name="com.umbrella.nasaapiapp.view.PictureFragment"
+        android:name="com.umbrella.nasaapiapp.view.fragments.PictureFragment"
         android:label="fragment_picture"
         tools:layout="@layout/fragment_picture" />
     <fragment
         android:id="@+id/wikiFragment"
-        android:name="com.umbrella.nasaapiapp.view.WikiFragment"
+        android:name="com.umbrella.nasaapiapp.view.fragments.WikiFragment"
         android:label="fragment_wiki"
         tools:layout="@layout/fragment_wiki" />
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.umbrella.nasaapiapp.view.fragments.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager" />
+    <fragment
+        android:id="@+id/meteorsCloseApproachDatesFragment"
+        android:name="com.umbrella.nasaapiapp.view.fragments.MeteorsCloseApproachDatesFragment"
+        android:label="fragment_meteors_close_approach_dates"
+        tools:layout="@layout/fragment_meteors_close_approach_dates" />
 </navigation>

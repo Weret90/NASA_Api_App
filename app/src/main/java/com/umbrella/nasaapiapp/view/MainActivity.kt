@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.umbrella.nasaapiapp.R
+import com.umbrella.nasaapiapp.view.fragments.ARG_IS_RED_THEME
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="app_main_margin">10dp</dimen>
+    <dimen name="header_text_size">24sp</dimen>
+    <dimen name="header_margin_top">16dp</dimen>
+
     <!--    bottom_sheet_layout-->
     <dimen name="bottom_sheet_views_margin_top">5dp</dimen>
     <dimen name="bottom_sheet_peek_height">80dp</dimen>
@@ -14,4 +18,14 @@
 
     <!--    start_theme-->
     <dimen name="start_theme_logo_size">150dp</dimen>
+    <dimen name="margin_between_next_previous_buttons">32dp</dimen>
+
+    <!--    fragment_view_pager-->
+    <dimen name="dots_corner_radius">8dp</dimen>
+    <dimen name="dots_size">16dp</dimen>
+    <dimen name="dots_spacing">4dp</dimen>
+    <dimen name="dots_indicator_margin_bottom">20dp</dimen>
+
+    <!--    item_meteor_name item_meteor_close_approach_date-->
+    <dimen name="item_meteor_text_views_margin">4dp</dimen>
 </resources>
