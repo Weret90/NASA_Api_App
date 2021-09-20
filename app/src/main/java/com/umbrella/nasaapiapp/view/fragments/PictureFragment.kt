@@ -1,10 +1,11 @@
-package com.umbrella.nasaapiapp.view
+package com.umbrella.nasaapiapp.view.fragments
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -15,8 +16,12 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.umbrella.nasaapiapp.R
 import com.umbrella.nasaapiapp.databinding.FragmentPictureBinding
-import com.umbrella.nasaapiapp.model.AppState
 import com.umbrella.nasaapiapp.model.Day
+import com.umbrella.nasaapiapp.model.PictureLoadState
+import com.umbrella.nasaapiapp.view.MainActivity
+import com.umbrella.nasaapiapp.view.hide
+import com.umbrella.nasaapiapp.view.show
+import com.umbrella.nasaapiapp.view.showToast
 import com.umbrella.nasaapiapp.viewmodel.PictureViewModel
 
 const val ARG_WIKI_REQUEST = "ARG_WIKI_REQUEST"
@@ -62,6 +67,7 @@ class PictureFragment : Fragment() {
                 }
             }
         }
+
         viewModel.getPictureLiveData().observe(viewLifecycleOwner) { result ->
             result?.let {
                 renderData(result)
@@ -70,6 +76,10 @@ class PictureFragment : Fragment() {
         if (!isDayWasChosen) {
             binding.chipToday.isChecked = true
             isDayWasChosen = true
+        }
+
+        binding.errorLayout.buttonReload.setOnClickListener {
+            viewModel.makeApiCall(Day.TODAY)
         }
     }
 
@@ -95,48 +105,48 @@ class PictureFragment : Fragment() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
-    private fun renderData(result: AppState) {
+    private fun renderData(result: PictureLoadState) {
         with(binding) {
             when (result) {
 
-                is AppState.Loading -> {
-                    progressBarLayout.root.visibility = View.VISIBLE
-                    bottomSheet.root.visibility = View.GONE
-                    bottomAppBar.visibility = View.GONE
+                is PictureLoadState.Loading -> {
+                    progressBarLayout.root.show()
+                    errorLayout.root.hide()
+                    bottomSheet.root.hide()
+                    bottomAppBar.hide()
                 }
 
-                is AppState.Success -> {
-                    Picasso.get().load(result.response.url)
-                        .into(pictureImageView, object : Callback {
-                            override fun onSuccess() {
-                                progressBarLayout.root.visibility = View.GONE
-                                bottomSheet.root.visibility = View.VISIBLE
-                                bottomAppBar.visibility = View.VISIBLE
-                                bottomSheet.bottomSheetDescriptionHeader.text =
-                                    result.response.title
-                                bottomSheet.bottomSheetDescription.text =
-                                    result.response.explanation
-                            }
-
-                            override fun onError(error: Exception) {
-                                progressBarLayout.progressBar.visibility = View.GONE
-                                showToast(error)
-                            }
-                        })
+                is PictureLoadState.Success -> {
+                    if (result.response.mediaType != "video") {
+                        Picasso.get().load(result.response.url)
+                            .into(pictureImageView, PicassoCallback(result))
+                        pictureImageView.isEnabled = false
+                        iconPlay.hide()
+                    } else {
+                        Picasso.get().load(result.response.thumbnailUrl)
+                            .into(pictureImageView, PicassoCallback(result))
+                        iconPlay.show()
+                        pictureImageView.isEnabled = true
+                        pictureImageView.setOnClickListener {
+                            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                data = Uri.parse(result.response.url)
+                            })
+                        }
+                    }
                     viewModel.clearPictureLiveData()
                 }
 
-                is AppState.Error -> {
-                    progressBarLayout.progressBar.visibility = View.GONE
-                    showToast(result.error)
+                is PictureLoadState.Error -> {
+                    binding.progressBarLayout.root.hide()
+                    binding.errorLayout.root.show()
+                    bottomSheet.root.hide()
+                    bottomAppBar.hide()
+                    errorLayout.errorMessage.text = result.error.message
+                    context?.showToast(result.error)
                     viewModel.clearPictureLiveData()
                 }
             }
         }
-    }
-
-    private fun showToast(error: Throwable) {
-        Toast.makeText(context, error.message, Toast.LENGTH_LONG).show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -164,5 +174,31 @@ class PictureFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private inner class PicassoCallback(val result: PictureLoadState.Success) : Callback {
+        override fun onSuccess() {
+            with(binding) {
+                progressBarLayout.root.hide()
+                errorLayout.root.hide()
+                bottomSheet.root.show()
+                bottomAppBar.show()
+                bottomSheet.bottomSheetDescriptionHeader.text =
+                    result.response.title
+                bottomSheet.bottomSheetDescription.text =
+                    result.response.explanation
+            }
+        }
+
+        override fun onError(error: Exception) {
+            with(binding) {
+                progressBarLayout.root.hide()
+                errorLayout.root.show()
+                bottomSheet.root.hide()
+                bottomAppBar.hide()
+                errorLayout.errorMessage.text = error.message
+            }
+            context?.showToast(error)
+        }
     }
 }

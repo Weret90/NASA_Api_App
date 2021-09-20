@@ -10,4 +10,16 @@
 
     <!--    menu_change_theme-->
     <string name="change_theme">Поменять тему</string>
+
+    <!--    error_layout-->
+    <string name="button_reload">Reload</string>
+
+    <!--    fragment_photo_from_mars-->
+    <string name="photo_from_mars_header">Фотографии с Марса</string>
+
+    <!--    item_meteor-->
+    <string name="item_meteor_label_diameter">Максимальный диаметр, км:</string>
+    <string name="item_meteor_label_asteroid_name">Название астероида:</string>
+    <string name="label_approach_date">Дата сближения:</string>
+    <string name="label_distance">Расстояние до Земли, км:</string>
 </resources>
