@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.view.adapters
+package com.umbrella.nasaapiapp.ui.view.adapters
 
 import android.view.LayoutInflater
 import android.view.View

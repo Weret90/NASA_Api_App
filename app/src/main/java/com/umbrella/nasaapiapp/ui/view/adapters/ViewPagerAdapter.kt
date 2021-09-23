@@ -1,11 +1,11 @@
-package com.umbrella.nasaapiapp.view.adapters
+package com.umbrella.nasaapiapp.ui.view.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.umbrella.nasaapiapp.view.fragments.MeteorsFragment
-import com.umbrella.nasaapiapp.view.fragments.PhotoFromMarsFragment
-import com.umbrella.nasaapiapp.view.fragments.PictureFragment
+import com.umbrella.nasaapiapp.ui.view.fragments.MeteorsFragment
+import com.umbrella.nasaapiapp.ui.view.fragments.PhotoFromMarsFragment
+import com.umbrella.nasaapiapp.ui.view.fragments.PictureFragment
 
 class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 

@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.view.fragments
+package com.umbrella.nasaapiapp.ui.view.fragments
 
 import android.content.Context
 import android.content.Intent
@@ -18,11 +18,11 @@ import com.umbrella.nasaapiapp.R
 import com.umbrella.nasaapiapp.databinding.FragmentPictureBinding
 import com.umbrella.nasaapiapp.model.Day
 import com.umbrella.nasaapiapp.model.PictureLoadState
-import com.umbrella.nasaapiapp.view.MainActivity
-import com.umbrella.nasaapiapp.view.hide
-import com.umbrella.nasaapiapp.view.show
-import com.umbrella.nasaapiapp.view.showToast
-import com.umbrella.nasaapiapp.viewmodel.PictureViewModel
+import com.umbrella.nasaapiapp.ui.view.MainActivity
+import com.umbrella.nasaapiapp.ui.view.hide
+import com.umbrella.nasaapiapp.ui.view.show
+import com.umbrella.nasaapiapp.ui.view.showToast
+import com.umbrella.nasaapiapp.ui.viewmodel.PictureViewModel
 
 const val ARG_WIKI_REQUEST = "ARG_WIKI_REQUEST"
 private const val ARG_IS_DAY_WAS_CHOSEN = "ARG_IS_DAY_WAS_CHOSEN"

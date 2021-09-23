@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.viewmodel
+package com.umbrella.nasaapiapp.ui.viewmodel
 
 import android.os.Build
 import androidx.annotation.RequiresApi

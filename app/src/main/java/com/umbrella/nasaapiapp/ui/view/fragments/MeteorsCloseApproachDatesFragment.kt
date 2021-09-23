@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.view.fragments
+package com.umbrella.nasaapiapp.ui.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.umbrella.nasaapiapp.databinding.FragmentMeteorsCloseApproachDatesBinding
 import com.umbrella.nasaapiapp.model.Meteor
-import com.umbrella.nasaapiapp.view.adapters.MeteorsCloseApproachDatesAdapter
+import com.umbrella.nasaapiapp.ui.view.adapters.MeteorsCloseApproachDatesAdapter
 
 class MeteorsCloseApproachDatesFragment : Fragment() {
 

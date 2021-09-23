@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.view.fragments
+package com.umbrella.nasaapiapp.ui.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.umbrella.nasaapiapp.R
-import com.umbrella.nasaapiapp.view.adapters.ViewPagerAdapter
+import com.umbrella.nasaapiapp.ui.view.adapters.ViewPagerAdapter
 
 class ViewPagerFragment : Fragment() {
 

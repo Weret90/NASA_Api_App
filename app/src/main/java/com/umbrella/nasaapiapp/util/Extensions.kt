@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.view
+package com.umbrella.nasaapiapp.ui.view
 
 import android.content.Context
 import android.view.View

@@ -17,6 +17,9 @@
     <!--    fragment_photo_from_mars-->
     <string name="photo_from_mars_header">Фотографии с Марса</string>
 
+    <!--    fragment_meteors-->
+    <string name="asteroid_picture">asteroid picture</string>
+
     <!--    item_meteor-->
     <string name="item_meteor_label_diameter">Максимальный диаметр, км:</string>
     <string name="item_meteor_label_asteroid_name">Название астероида:</string>

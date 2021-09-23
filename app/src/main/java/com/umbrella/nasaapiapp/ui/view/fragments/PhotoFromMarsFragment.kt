@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.view.fragments
+package com.umbrella.nasaapiapp.ui.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,11 +11,11 @@ import com.squareup.picasso.Picasso
 import com.umbrella.nasaapiapp.databinding.FragmentPhotoFromMarsBinding
 import com.umbrella.nasaapiapp.model.Photo
 import com.umbrella.nasaapiapp.model.PhotosFromMarsLoadState
-import com.umbrella.nasaapiapp.view.hide
-import com.umbrella.nasaapiapp.view.invisible
-import com.umbrella.nasaapiapp.view.show
-import com.umbrella.nasaapiapp.view.showToast
-import com.umbrella.nasaapiapp.viewmodel.PhotosFromMarsViewModel
+import com.umbrella.nasaapiapp.ui.view.hide
+import com.umbrella.nasaapiapp.ui.view.invisible
+import com.umbrella.nasaapiapp.ui.view.show
+import com.umbrella.nasaapiapp.ui.view.showToast
+import com.umbrella.nasaapiapp.ui.viewmodel.PhotosFromMarsViewModel
 
 class PhotoFromMarsFragment : Fragment() {
 
