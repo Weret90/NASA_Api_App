@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/pictureFragment"
-        android:name="com.umbrella.nasaapiapp.view.fragments.PictureFragment"
+        android:name="com.umbrella.nasaapiapp.ui.view.fragments.PictureFragment"
         android:label="fragment_picture"
         tools:layout="@layout/fragment_picture" />
     <fragment
         android:id="@+id/wikiFragment"
-        android:name="com.umbrella.nasaapiapp.view.fragments.WikiFragment"
+        android:name="com.umbrella.nasaapiapp.ui.view.fragments.WikiFragment"
         android:label="fragment_wiki"
         tools:layout="@layout/fragment_wiki" />
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.umbrella.nasaapiapp.view.fragments.ViewPagerFragment"
+        android:name="com.umbrella.nasaapiapp.ui.view.fragments.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" />
     <fragment
         android:id="@+id/meteorsCloseApproachDatesFragment"
-        android:name="com.umbrella.nasaapiapp.view.fragments.MeteorsCloseApproachDatesFragment"
+        android:name="com.umbrella.nasaapiapp.ui.view.fragments.MeteorsCloseApproachDatesFragment"
         android:label="fragment_meteors_close_approach_dates"
         tools:layout="@layout/fragment_meteors_close_approach_dates" />
 </navigation>

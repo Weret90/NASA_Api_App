@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.view.fragments
+package com.umbrella.nasaapiapp.ui.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import androidx.navigation.fragment.findNavController
 import com.umbrella.nasaapiapp.R
 import com.umbrella.nasaapiapp.databinding.FragmentMeteorsBinding
 import com.umbrella.nasaapiapp.model.MeteorsLoadState
-import com.umbrella.nasaapiapp.view.adapters.MeteorsNameAdapter
-import com.umbrella.nasaapiapp.view.hide
-import com.umbrella.nasaapiapp.view.show
-import com.umbrella.nasaapiapp.viewmodel.MeteorsViewModel
+import com.umbrella.nasaapiapp.ui.view.adapters.MeteorsNameAdapter
+import com.umbrella.nasaapiapp.ui.view.hide
+import com.umbrella.nasaapiapp.ui.view.show
+import com.umbrella.nasaapiapp.ui.viewmodel.MeteorsViewModel
 
 const val ARG_METEOR_INFO = "ARG_METEOR_INFO"
 

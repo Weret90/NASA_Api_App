@@ -1,4 +1,4 @@
-package com.umbrella.nasaapiapp.viewmodel
+package com.umbrella.nasaapiapp.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
