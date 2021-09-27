@@ -25,4 +25,8 @@
         android:name="com.umbrella.nasaapiapp.ui.view.fragments.MeteorsCloseApproachDatesFragment"
         android:label="fragment_meteors_close_approach_dates"
         tools:layout="@layout/fragment_meteors_close_approach_dates" />
+    <fragment
+        android:id="@+id/animationsFragment"
+        android:name="com.umbrella.nasaapiapp.ui.view.fragments.AnimationsFragment"
+        android:label="AnimationsFragment" />
 </navigation>
