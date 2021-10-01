@@ -165,6 +165,9 @@ class PictureFragment : Fragment() {
         if (item.itemId == R.id.go_to_animation_fragment) {
             findNavController().navigate(R.id.animationsFragment)
         }
+        if (item.itemId == R.id.got_to_notes_fragment) {
+            findNavController().navigate(R.id.notesFragment)
+        }
         return super.onOptionsItemSelected(item)
     }
 
