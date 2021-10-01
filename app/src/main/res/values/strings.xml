@@ -25,4 +25,5 @@
     <string name="item_meteor_label_asteroid_name">Название астероида:</string>
     <string name="label_approach_date">Дата сближения:</string>
     <string name="label_distance">Расстояние до Земли, км:</string>
+
 </resources>

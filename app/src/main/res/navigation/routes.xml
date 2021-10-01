@@ -29,4 +29,9 @@
         android:id="@+id/animationsFragment"
         android:name="com.umbrella.nasaapiapp.ui.view.fragments.AnimationsFragment"
         android:label="AnimationsFragment" />
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.umbrella.nasaapiapp.ui.view.fragments.NotesFragment"
+        android:label="fragment_notes"
+        tools:layout="@layout/fragment_notes" />
 </navigation>
