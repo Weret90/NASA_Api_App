@@ -162,6 +162,9 @@ class PictureFragment : Fragment() {
             sp.edit().putBoolean(ARG_IS_RED_THEME, !isRedTheme).apply()
             context.recreate()
         }
+        if (item.itemId == R.id.go_to_animation_fragment) {
+            findNavController().navigate(R.id.animationsFragment)
+        }
         return super.onOptionsItemSelected(item)
     }
 
