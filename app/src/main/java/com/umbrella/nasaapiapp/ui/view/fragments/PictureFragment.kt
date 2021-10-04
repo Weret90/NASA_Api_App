@@ -2,9 +2,15 @@ package com.umbrella.nasaapiapp.ui.view.fragments
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.ScaleXSpan
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -80,6 +86,37 @@ class PictureFragment : Fragment() {
 
         binding.errorLayout.buttonReload.setOnClickListener {
             viewModel.makeApiCall(Day.TODAY)
+        }
+
+        binding.bottomSheet.bottomSheetDescription.setOnClickListener {
+            val text = binding.bottomSheet.bottomSheetDescription.text
+            val spannable = SpannableString(text)
+            spannable.setSpan(
+                RelativeSizeSpan(1.2f),
+                0,
+                text.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannable.setSpan(
+                ForegroundColorSpan(Color.RED),
+                0,
+                text.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            binding.bottomSheet.bottomSheetDescription.text = spannable
+        }
+
+        binding.bottomSheet.bottomSheetDescription.setOnLongClickListener {
+            val text = binding.bottomSheet.bottomSheetDescription.text
+            val spannable = SpannableString(text)
+            spannable.setSpan(
+                RelativeSizeSpan(0.8f),
+                0,
+                text.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            binding.bottomSheet.bottomSheetDescription.text = spannable
+            true
         }
     }
 
